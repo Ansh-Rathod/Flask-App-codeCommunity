@@ -1,0 +1,36 @@
+{% extends '/includes/_layout.html'%} {% block css%}
+<link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+<style>
+    .app_bar {
+        z-index: 100;
+    }
+</style> {% endblock %} {% block body %}
+<div class="app_bar">
+    <div>
+        <a href="/home"><i class="fas fa-home"></i></a>
+    </div>
+
+    <div>
+        <a href="/search"> <i class="fas fa-search-plus"></i> </a>
+    </div>
+
+
+    <div>
+        <a href="/addpost"> <i class="fas fa-plus"></i> </a>
+    </div>
+
+    <div>
+
+        <a href="/profile"> <i class="fas fa-user-alt"></i></a>
+    </div>
+
+
+    <div>
+        <a href="/logout"> <i class="fas fa-sign-out-alt"></i></a>
+    </div>
+
+</div>
+
+{% endblock %} {% block js %}
+<script src="{{ url_for('static',filename='js/main.js')}}"></script>
+{% endblock %}

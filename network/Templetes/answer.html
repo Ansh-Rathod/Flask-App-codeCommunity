@@ -1,0 +1,53 @@
+ {% extends 'includes/_layout.html' %} {% block css %}
+<link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.1.0/cosmo/bootstrap.min.css"> {% endblock %} {% block body %} {% include 'includes/_navbar.html' %}
+<div class="container">
+    {% include 'includes/_messages.html' %}
+    <div class="profile-logo">
+        <img class="logo" src="{{url_for('static',filename='images/'+result['qi_profile'])}}" alt=""> {{result['qi_name']}}
+    </div>
+    <div class="title_body">
+        <h4>{{result['_title']}}</h4>
+    </div>
+    <div class="outline">
+        <i class="fas fa-laptop-code"></i><i class="fas fa-code"></i>
+    </div>
+    <div class="body_section">
+        <h3>Question</h3>
+        <br> {{result['_body']|safe}}
+        <br> {%if result['qi_img']%}
+        <img class="qiz-img" src="{{url_for('static',filename='images/'+result['qi_img'])}}" alt="">{%endif%}
+
+    </div>
+
+    {% for answer in answers %}
+    <div class="answered-profile">
+
+        <img src="{{ url_for('static',filename='images/'+answer['qi_profile'])}}" alt="" class="logo"> {{answer['qi_name']}}
+    </div>
+    <div class=answers>
+        {{ answer['qi_answer']|safe }} {% if answer['qi_name'] == session['username']%}
+        <form action="{{url_for('delete',id=answer['id'])}}" class="float-right" method="post">
+            <input type="hidden" name="ans_id" value="DELETE">
+            <button type="submit" class="btn-danger" style="padding:2px 5px;outline:none;border-radius: 5px;border:1px solid #000;">Delete</button>
+        </form><br> {% endif%}
+    </div>
+    <!-- /////////////////////////////////// -->
+    {% endfor %}
+    <div class="answer_profile">
+        <img src="{{ url_for('static',filename='images/'+result1['_profile'])}}" alt="" class="logo"> {{result1['_username']}}
+    </div>
+
+    <div class="answer_body">
+        <h3>Add your Answer</h3>
+        <form action="" method="post">
+            {% from 'includes/_formhelpers.html' import render_field %}
+            <div class="form-group">
+                {{render_field(form.Answer,class_='form-control',rows=12,id='editor')}}
+            </div>
+            <button type="submit" class="btn btn-primary">Add your Answer</button>
+        </form>
+    </div>
+
+</div><br><br><br><br><br><br><br> {% include 'includes/_appbar.html'%} {% endblock %} {% block js %}
+<script src="{{ url_for('static',filename='js/main.js')}}"></script>{% endblock %}

@@ -1,0 +1,72 @@
+{% extends 'includes/_layout.html' %} {% block css %}
+<link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.1.0/cosmo/bootstrap.min.css"> {% endblock %} {% block body %} {% include 'includes/_navbar.html' %}
+<div class="profile-container">
+    <div class="cover"></div>
+    <img class="profile-image" src="{{ url_for('static',filename='./images/'+result['_profile'])}}" alt="" id="galleryIMG">
+    <br>
+    <div class="profile-about">
+        <h2>{{result['_username']}}</h2>
+
+        <h4>name : {{result['_name']}}</h4>
+
+        <br>
+
+
+    </div>
+    <div class="about-section">
+        <h3 style="margin:1rem 0;">About Me:</h3>
+
+        <p>{{result['_about']}}</p>
+    </div>
+    <h1 style="text-align:center;margin:1rem 0;">questions</h1><br> {% for result1 in questions %}
+    <div class="profile-logo">
+        <img class="logo" src="{{url_for('static',filename='images/'+result1['qi_profile'])}}" alt="" id="galleryIMG"> {{result1['qi_name']}}
+    </div>
+    <div class="title_body">
+        <h4>{{result1['_title']}}</h4>
+    </div>
+    <div class="outline">
+        <i class="fas fa-laptop-code"></i><i class="fas fa-code"></i>
+    </div>
+    <div class="body_section">
+        <h3>Question</h3>
+        <br> {{result1['_body']|safe}}
+        <br> {%if result1['qi_img']%}
+        <img class="qiz-img" src="{{url_for('static',filename='images/'+result1['qi_img'])}}" id="galleryIMG">{%endif%}
+    </div>
+    <div class="comment">
+        <div class="comment-body"><a href="/answer/{{result1['id']}}"><i class="fas fa-pencil-alt"></i></a>
+
+        </div>
+        <div class="inline-icon"><a href="#"><i class="fas fa-spell-check" style="margin-right:10px"></i></a>
+            <div>{{result1['created_date']}}</div>
+        </div>
+    </div>
+
+    {% endfor%}
+</div><br><br><br><br><br><br><br> {% include 'includes/_appbar.html'%} {% endblock %} {% block js %}
+<script src="{{ url_for('static',filename='js/main.js')}}"></script>
+<script>
+    const galleryIMG = document.querySelectorAll('#galleryIMG')
+    const body = document.body
+    const full = document.createElement('div')
+    full.classList.add('full')
+    body.appendChild(full)
+    const newFull = document.createElement('img')
+    newFull.classList.add('newFull')
+    full.appendChild(newFull)
+    const close = document.getElementById('close')
+    galleryIMG.forEach(item => {
+        item.onclick = function() {
+            full.classList.add('open')
+            newFull.src = this.src
+        }
+    })
+    full.onclick = function(e) {
+        if (e.target.classList.contains('full')) {
+            full.classList.remove('open')
+        }
+    }
+</script>
+{% endblock %}

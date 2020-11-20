@@ -1,0 +1,29 @@
+{% extends 'includes/_layout.html' %} {% block css %}
+<link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.1.0/cosmo/bootstrap.min.css"> {% endblock %} {% block body %} {% include 'includes/_navbar.html' %}
+<div class="form-container">
+    <form class="form-container-inner" action="" method="post">
+        <h3 class="text-center">Hello,Friend!</h3>
+        <div class="alert" style="background:#9ae98e;color:#000;">Fill all detials to sing-up</div> {% from 'includes/_formhelpers.html' import render_field %}
+        <div class="form-group">
+            {{render_field(form.name,class_='form-control')}}
+        </div>
+        <div class="form-group">
+            {{render_field(form.username,class_='form-control')}}
+        </div>
+        <div class="form-group">
+            {{render_field(form.email,class_='form-control')}}
+        </div>
+        <div class="form-group">
+            {{render_field(form.password,class_='form-control')}}
+        </div>
+        <div class="form-group">
+            {{render_field(form.confrim,class_='form-control')}}
+        </div>
+        <p><input type="submit" value="Submit" class="btn btn-primary"></p>
+    </form>
+</div>
+
+{% endblock %} {% block js %}
+<script src="{{ url_for('static',filename='js/main.js')}}"></script>
+{% endblock %}

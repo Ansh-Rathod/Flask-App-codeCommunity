@@ -1,0 +1,16 @@
+{% extends 'includes/_layout.html' %} {% block css %}
+<link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}"> {% endblock %} {% block body %} {% include 'includes/_navbar.html' %}
+<div class="jumbotron">
+    {% include 'includes/_messages.html' %}
+    <h1>Welcome to the <span class="nav_brand"><span class="nav_span"><i class="fas fa-code"></i></span>code<span class="nav_underline">Camp</span></span>
+    </h1>
+    <h4>Hello,Friend! here is the
+        <span class="nav_brand"><span class="nav_span"><i class="fas fa-code"></i></span>codeCamp</span> Website,Where you can ask a question about code to our community</h4>
+    <a href="/signup" class="btn btn-primary">Sing Up Now!</a><br><br>
+    <h4>If you already loged in</h4>
+    <a href="/home" class="btn btn-primary">Home</a><br>
+</div>
+
+{% endblock %} {% block js %}
+<script src="{{ url_for('static',filename='js/main.js')}}"></script>
+{% endblock %}

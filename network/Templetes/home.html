@@ -1,0 +1,59 @@
+{% extends 'includes/_layout.html' %} {% block css %}
+<link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}"> {% endblock %} {% block body %} {% include 'includes/_navbar.html' %}
+<div class="container">
+    {% include 'includes/_messages.html' %} {% for result in results %}
+    <div class="profile-logo">
+        <img class="logo" src="{{url_for('static',filename='images/'+result['qi_profile'])}}" alt="" id="galleryIMG">
+        <h4>{{result['qi_name']}}
+        </h4>
+    </div>
+    <div class="title_body">
+        <h4>{{result['_title']}}</h4>
+    </div>
+    <div class="outline">
+        <i class="fas fa-laptop-code"></i><i class="fas fa-code"></i></div>
+    <div class="body_section">
+        <h3>Question</h3>
+        <br> {{result['_body']|safe}}
+        <br> {%if result['qi_img']%}
+        <img class="qiz-img" src="{{url_for('static',filename='images/'+result['qi_img'])}}" alt="" id="galleryIMG">{%endif%}
+    </div>
+    <div class="comment">
+        <div class="comment-body"><a href="/answer/{{result['id']}}"><i class="fas fa-pencil-alt"></i></a>
+
+        </div>
+        <div class="inline-icon"><a href="#"><i class="fas fa-spell-check" style="margin-right:10px"></i></a>
+            <div>{{result['created_date']}}</div>
+        </div>
+
+
+    </div>
+
+
+    {% endfor %}
+
+</div><br><br><br><br><br><br><br> {% include 'includes/_appbar.html'%} {% endblock %} {% block js %}
+<script src="{{ url_for('static',filename='js/main.js')}}"></script>
+<script>
+    const galleryIMG = document.querySelectorAll('#galleryIMG')
+    const body = document.body
+    const full = document.createElement('div')
+    full.classList.add('full')
+    body.appendChild(full)
+    const newFull = document.createElement('img')
+    newFull.classList.add('newFull')
+    full.appendChild(newFull)
+    const close = document.getElementById('close')
+    galleryIMG.forEach(item => {
+        item.onclick = function() {
+            full.classList.add('open')
+            newFull.src = this.src
+        }
+    })
+    full.onclick = function(e) {
+        if (e.target.classList.contains('full')) {
+            full.classList.remove('open')
+        }
+    }
+</script>
+{% endblock %}

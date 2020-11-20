@@ -1,0 +1,39 @@
+{% extends 'includes/_layout.html' %} {% block css %}
+<link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.1.0/cosmo/bootstrap.min.css">{% endblock %} {% block body %} {% include 'includes/_navbar.html' %}
+<div class="profile-container">
+    <div class="cover"></div>
+    <img class="profile-image" src="{{ url_for('static',filename='./images/'+profile)}}" alt="">
+    <div class="form-about">
+        <br><br><br><br><br><br><br>
+        <div class="update-form-container">
+            <form action="" method="post" enctype="multipart/form-data">
+                {% include 'includes/_messages.html'%}
+                <div class="from-group"> <label>Select your profile image</label>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="image" id="image">
+                        <label for="image" class="custom-file-label">Select image</label><br><br></div>
+                    <button type="submit" class="btn btn-primary">Change Profile</button><br><br>
+                    <hr style="background-color:aliceblue;">
+            </form>
+            <form action="" method="POST">
+                <div class="form-group">
+                    <label for="Name">Tag your language</label>
+                    <input type="text" name='fullname' class="form-control" value="{{request.form.fullname}}">
+                </div>
+
+                <div class="form-group">
+                    <label>About me</label>
+                    <textarea type="text" name='about' class="form-control" value="{{request.form.about}}"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">update your profile</button><br><br>
+            </form>
+
+            </div>
+        </div><br><br>
+
+    </div>
+</div> <br><br><br><br><br><br><br>{% include 'includes/_appbar.html'%} {% endblock %} {% block js %}
+<script src="{{ url_for('static',filename='js/main.js')}}"></script>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'includes/_layout.html' %} {% block css %}
+<link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.1.0/cosmo/bootstrap.min.css">{% endblock %} {% block body %} {% include 'includes/_navbar.html' %}
+<div class="container">
+    {% include 'includes/_messages.html' %}
+    <form action="{{ url_for('search')}}" method="post" class="form-inline my-2 my-lg-0">
+        <div class="form-group" style="display:flex;flex-direction:row;align-items:center;justify-content:center;width:100%;">
+            <input type="text" class="form-control kill" name="search" onkeyup="myFunction()" style="padding:10px 12px;" placeholder="Search users..."><button class="btn btn-primary"><i class="fa fa-search"></i></button></div>
+    </form>
+    <h1>All Users</h1>
+
+    <ul class="user">
+        {% for result in result1 %}
+
+        <li class="answer_profile" style="border-bottom: 2px solid black;">
+            <img src="{{ url_for('static',filename='images/'+result['_profile'])}}" alt="" class="logo">
+            <a href="{{ url_for('about',id=result['id'])}}">
+                <h4>{{result['_username']}}</h4>
+            </a>
+        </li>
+
+        {% endfor %}
+    </ul>
+</div>
+{% include 'includes/_appbar.html'%} {% endblock %} {% block js %}
+<script src="{{ url_for('static',filename='js/main.js')}}"></script>
+<script>
+    function myFunction() {
+        // Declare variables
+        var input, filter, ul, li, h2, i, txtValue
+        input = document.querySelector(".kill")
+        filter = input.value.toUpperCase()
+        ul = document.querySelector('.user')
+        li = ul.getElementsByTagName("li")
+
+        // Loop through all list items, and hide those who don't match the search query
+        for (i = 0; i < li.length; i++) {
+            a = li[i].getElementsByTagName("h4")[0]
+            txtValue = a.textContent || a.innerText
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                li[i].style.display = ""
+            } else {
+                li[i].style.display = "none"
+            }
+        }
+    }
+</script>
+{% endblock %}

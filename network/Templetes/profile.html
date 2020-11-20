@@ -1,0 +1,57 @@
+{% extends 'includes/_layout.html' %} {% block css %}
+<link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.1.0/cosmo/bootstrap.min.css"> {% endblock %} {% block body %} {% include 'includes/_navbar.html' %}
+<div class="profile-container">
+    <div class="cover"></div>
+    <img class="profile-image" src="{{ url_for('static',filename='./images/'+profile)}}" alt="">
+    <br>
+    <div class="profile-about">
+        <h2>{{session['username']}}</h2>
+
+        <h4>name : {{name}}</h4>
+
+        <br>
+        <a href="/updateprofile" class="update-link"><i class="fas fa-edit"></i>Update Profile</a><br><br>
+
+    </div>
+    <div class="about-section">
+        <h3 style="margin:1rem 0;">About Me:</h3>
+
+        <p>{{about}}</p>
+    </div>
+    <h1 style="text-align:center;margin:1rem 0;">My questions</h1><br> {% for result in questions%}
+    <div class="profile-logo">
+        <img class="logo" src="{{url_for('static',filename='images/'+result['qi_profile'])}}" alt=""> {{result['qi_name']}}
+    </div>
+    <div class="title_body">
+        <h4>{{result['_title']}}</h4>
+    </div>
+    <div class="outline">
+        hell
+    </div>
+    <div class="body_section">
+        <h3>Question</h3>
+        <br> {{result['_body']|safe}}
+        <br> {%if result['qi_img']%}
+        <img class="qiz-img" src="{{url_for('static',filename='images/'+result['qi_img'])}}" alt="">{%endif%}
+    </div>
+    <div class="comment">
+        <div class="comment-body"><a href="/answer/{{result['id']}}"><i class="fas fa-pencil-alt"></i></a>
+
+        </div>
+        <div class="inline-icon"><a href="#"><i class="fas fa-spell-check" style="margin-right:10px"></i></a>
+            <div>{{result['created_date']}}</div>
+        </div>
+
+        {% if result['qi_name'] == session['username']%}
+        <form action="{{ url_for('delete_qiz',id=result['id'])}}" class="float-right" method="post">
+            <input type="hidden" name="ans_id" value="DELETE">
+            <button type="submit" class="btn-danger" style="padding:2px 5px;outline:none;border-radius: 5px;border:1px solid #000;">Delete</button>
+        </form>
+        {% endif%}
+    </div>
+
+    {% endfor%}
+</div><br><br><br><br><br><br><br> {% include 'includes/_appbar.html'%} {% endblock %} {% block js %}
+<script src="{{ url_for('static',filename='js/main.js')}}"></script>
+{% endblock %}

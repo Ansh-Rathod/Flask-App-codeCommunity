@@ -1,0 +1,34 @@
+{% extends 'includes/_layout.html' %} {% block css %}
+<link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.1.0/cosmo/bootstrap.min.css">{% endblock %} {% block body %} {% include 'includes/_navbar.html' %}
+<div class="profile-container">
+    <div class="cover"></div>
+    <img class="profile-image" src="{{ url_for('static',filename='./images/'+profile)}}" alt="">
+    <div class="form-about">
+        <br><br><br><br><br><br><br>
+        <div class="update-form-container">
+            <form action="" method="post">
+                <h3 class="text-center">Setting up your profile</h3>
+                <div class="alert" style="background:#9ae98e;color:#000;">fill only what you want to change</div> {% from 'includes/_formhelpers.html' import render_field %}
+                <div class="form-group">
+                    {{render_field(form.name,class_='form-control',value=name)}}
+                </div>
+                <div class="form-group">
+                    {{render_field(form.username,class_='form-control',value=username,disabled=true)}}
+                </div>
+                <div class="form-group">
+                    {{render_field(form.email,class_='form-control',value=email)}}
+                </div>
+                <p><input type="submit" value="Set Up" class="btn btn-primary"></p>
+            </form>
+
+            <a href="/newpassword">Change Password??</a>
+
+
+        </div>
+    </div><br><br>
+
+</div>
+</div> <br><br><br><br><br><br><br>{% include 'includes/_appbar.html'%} {% endblock %} {% block js %}
+<script src="{{ url_for('static',filename='js/main.js')}}"></script>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'includes/_layout.html' %} {% block css %}
+<link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.1.0/cosmo/bootstrap.min.css"> {% endblock %} {% block body %} {% include 'includes/_navbar.html' %}
+<div class="form-container">
+
+    <form action="" method="post" class="form-container-inner"> {% from 'includes/_formhelpers.html' import render_field %}
+        <h1 class="form-title text-center">login</h1>{% include 'includes/_messages.html' %}
+        <div class="form-group">
+            {{render_field(login_form.login_username,class_="form-control")}}
+        </div>
+        <div class="form-group">
+            {{render_field(login_form.login_password,class_="form-control")}}
+        </div>
+        <p><input type="submit" value="Submit" class="btn btn-primary" /></p>
+    </form>
+</div>
+{% endblock %} {% block js %}
+<script src="{{ url_for('static',filename='js/main.js')}}"></script>
+{% endblock %}

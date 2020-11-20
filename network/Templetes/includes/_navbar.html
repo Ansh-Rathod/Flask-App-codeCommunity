@@ -1,0 +1,17 @@
+{% extends '/includes/_layout.html'%} {% block css%}
+<link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}"> {% endblock %} {% block body %}
+<div class="nav_bar">
+    <div class="navbar-inner-one">
+        <h2 class="nav_brand"><a href="#"><span class="nav_span"><i class="fas fa-code"></i></span> code<span class="nav_underline">Community</span></a></h2>
+    </div>
+    <div class="nav-inner-two">
+
+        {% if session.logged_in %}
+        <a href="/setting"><i class="fas fa-user-cog fa-2x"></i></a>{% else%}
+        <h4 style="margin-right: 10px;"><a href="/">HOME</a></h4>
+        <h4><a href="/login">LOGIN</a></h4> {% endif %}
+    </div>
+</div>
+{% endblock %} {% block js %}
+<script src="{{ url_for('static',filename='js/main.js')}}"></script>
+{% endblock %}
