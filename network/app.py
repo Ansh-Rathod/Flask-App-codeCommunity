@@ -1,4 +1,4 @@
-import re
+import requests
 from flask import *
 from flask_mysqldb import *
 from wtforms import *
@@ -387,6 +387,6 @@ def about(id):
 
 if __name__ == '__main__':
     app.secret_key="appi00"
-    app.run(debug=True)
+    app.run()
 
      
